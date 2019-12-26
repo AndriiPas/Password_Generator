@@ -1,0 +1,5 @@
+SELECT passwords.id AS passwords_id, passwords.password AS passwords_password, passwords.user_id AS passwords_user_id 
+FROM passwords 
+WHERE %(param_1)s = passwords.user_id
+
+'$5$rounds=535000$dCaGQg44YZ5Mx5hk$hAnA5YRKr345IT/nytdLbvEW53B.mmOiClZnYZMZ7p5'
