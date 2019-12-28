@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    </head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark primary-color">
+    {% if current_user.is_anonymous %}
+        <a class="navbar-brand" href="{{ url_for('login') }}">Login</a>
+    {% else %}
+        <a class="navbar-brand" href="{{ url_for('logout') }}">Logout</a>
+    {% endif %}
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+        aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+  <div class="collapse navbar-collapse" id="basicExampleNav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+          <a class="nav-link" href="#">none</a>
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">Dropdown</a>
+        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">All Products</a>
+
+
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+</nav>
+
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+{%block content%} {%endblock%}
+
+
+<footer class="page-footer font-small teal pt-4 bg-dark ">
+  <div class="footer-copyright text-center py-3">© 2019 Copyright:
+    <a href="https://github.com/AndriiPas/common/tree/flask_3"> AndriiPas Git</a>
+  </div>
+</footer>
+
+</body>
+</html>
