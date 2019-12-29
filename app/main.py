@@ -20,7 +20,6 @@ def hello():
                             form.special_symbol.data)
         password_entropy = tes.password_entropy()
         if current_user.is_authenticated:
-            print(current_user.username)
             user = User.query.filter_by(username=str(current_user.username)).first()
             data = Passwords(password=password, user_id=user.id)
             db.session.add(data)
@@ -53,11 +52,18 @@ def logout():
     return redirect(url_for('hello'))
 
 
-@app.route('/all_password')
-@login_required
+@app.route('/all_password', methods=['GET', 'POST'])
 def get_all_password():
+    return render_template('all_password.html', pas_list=Passwords.query.all())
 
-    return render_template('all_password.html')
+
+@app.route('/my_password', methods=['GET', 'POST'])
+@login_required
+def get_my_password():
+    user = User.query.filter_by(username=str(current_user.username)).first()
+    res = Passwords.query.filter_by(user_id=user.id).all()
+    return render_template('all_password.html', pas_list=res)
+
 
 
 @app.route('/register', methods=['GET', 'POST'])

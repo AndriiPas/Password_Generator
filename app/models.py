@@ -26,7 +26,7 @@ class Passwords(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return '<Passwords {}>'.format(self.body)
+        return '<Passwords {}>'.format(self.password)
 
 
 @login.user_loader
