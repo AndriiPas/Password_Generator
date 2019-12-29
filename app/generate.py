@@ -5,7 +5,7 @@ from math import pow, log
 
 class Generate:
 
-    def __init__(self, count_of_symbol):
+    def __init__(self, count_of_symbol=None):
         self.pul = 26
         self.count_of_symbol = count_of_symbol
 

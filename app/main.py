@@ -5,7 +5,7 @@ from werkzeug.utils import redirect
 
 from app.forms import Form, LoginForm, RegistrationForm
 from app.generate import Generate
-from app.models import User
+from app.models import User, Passwords
 from app import app, db
 
 
@@ -13,14 +13,20 @@ from app import app, db
 def hello():
     form = Form()
     tes = Generate(form.count_of_symbol.data)
-    password = None
     if request.method == "POST":
         password = tes.generate(
                             form.up_and_lw.data,
                             form.digit.data,
                             form.special_symbol.data)
-    password_entropy = tes.password_entropy()
-    return render_template("home.html", form=form, password=password, password_entropy=password_entropy)
+        password_entropy = tes.password_entropy()
+        if current_user.is_authenticated:
+            print(current_user.username)
+            user = User.query.filter_by(username=str(current_user.username)).first()
+            data = Passwords(password=password, user_id=user.id)
+            db.session.add(data)
+            db.session.commit()
+        return render_template("home.html", form=form, password=password, password_entropy=password_entropy)
+    return render_template("home.html", form=form)
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -47,9 +53,10 @@ def logout():
     return redirect(url_for('hello'))
 
 
-@app.route('/pass_list')
+@app.route('/all_password')
 @login_required
 def get_all_password():
+
     return render_template('all_password.html')
 
 

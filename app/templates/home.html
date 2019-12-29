@@ -12,17 +12,17 @@
     {{form.count_of_symbol(size = 30)}}
 </p>
     <p>
-    Include Lowercase And Uppercase Characters:{{form.up_and_lw()}} <br>
+    Include Lowercase And Uppercase Characters: {{form.up_and_lw()}} <br>
 </p>
     <p>
-    Include Numbers:{{form.digit()}} <br>
+    Include Numbers: {{form.digit()}} <br>
 </p>
     <p>
     Exclude Ambiguous Characters: {{form.special_symbol()}} <br>
 </p>
     <p>{{form.generate()}}<p>
 </form>
-    </div>
+
 
     <p>
     {%if password%}
@@ -30,5 +30,6 @@
         password strong: {{password_entropy}} <br>
     {%endif%}
     </p>
+    </div>
 </ul>
 {% endblock %}
