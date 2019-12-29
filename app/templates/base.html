@@ -22,7 +22,17 @@
   <div class="collapse navbar-collapse" id="basicExampleNav">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-          <a class="nav-link" href="#">none</a>
+          <a class="nav-link" href="{{ url_for('hello') }}">Home</a>
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+
+       <li class="nav-item active">
+           {%if current_user.is_anonymous%}
+          <a class="nav-link" href="{{ url_for('get_all_password') }}">All Password</a>
+           {% else %}
+           <a class="nav-link" href="{{ url_for('get_my_password') }}">My Password</a>
+           {% endif %}
           <span class="sr-only">(current)</span>
         </a>
       </li>
